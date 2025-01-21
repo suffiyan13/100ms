@@ -93,13 +93,6 @@ jobs:
         run: |
           echo "Minikube IP: $(minikube ip)"
           echo "Flask app is accessible at http://$(minikube ip):30001"
-
-      # Step 16: Optional - Add an output with the URL (for reference in your pipeline)
-      - name: Set output URL
-        id: flask-app-url
-        run: |
-          echo "::set-output name=url::http://$(minikube ip):30001"
-
       # Step 17: Show the Flask app URL
       - name: Show Flask app URL
         run: |
