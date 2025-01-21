@@ -28,12 +28,12 @@ jobs:
       # Step 4: Build the Docker image of the Flask app
       - name: Build Docker image
         run: |
-          docker build -t suffiyan13/flask-app:${{ github.sha }} .  # Replace suffiyan13 with your Docker Hub username
+          docker build -t shaik2024/flask-app:${{ github.sha }} .  # Replace suffiyan13 with your Docker Hub username
 
       # Step 5: Push the Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
         run: |
-          docker push suffiyan13/flask-app:${{ github.sha }}  # Replace suffiyan13 with your Docker Hub username
+          docker push shaik2024/flask-app:${{ github.sha }}  # Replace suffiyan13 with your Docker Hub username
 
   deploy:
     runs-on: ubuntu-latest
