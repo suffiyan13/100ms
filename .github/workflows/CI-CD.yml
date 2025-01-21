@@ -83,3 +83,19 @@ jobs:
         if: failure()  # This step is triggered only if previous steps fail
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployment failed for Flask app in Kubernetes!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+# Step 15: Get the Minikube IP
+      - name: Get Minikube IP
+        run: |
+          echo "Minikube IP: $(minikube ip)"
+          echo "Flask app is accessible at http://$(minikube ip):30001"
+
+      # Step 16: Optional - Add an output with the URL (for reference in your pipeline)
+      - name: Set output URL
+        id: flask-app-url
+        run: |
+          echo "::set-output name=url::http://$(minikube ip):30001"
+
+      # Step 17: Show the Flask app URL
+      - name: Show Flask app URL
+        run: |
+          echo "Flask app is available at: http://$(minikube ip):30001"
