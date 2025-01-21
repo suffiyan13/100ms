@@ -71,12 +71,12 @@ jobs:
       # Step 11: Apply Kubernetes deployment YAML (Flask app deployment)
       - name: Deploy Flask app to Kubernetes
         run: |
-          kubectl apply -f .github/deployment/flask-app-deployment.yaml  # Path to your deployment YAML file
+          kubectl apply -f deployment/flask-app-deployment.yaml  # Path to your deployment YAML file
 
       # Step 12: Apply Kubernetes service YAML (Flask app service)
       - name: Deploy Flask service to Kubernetes
         run: |
-          kubectl apply -f .github/deployment/flask-app-service.yaml
+          kubectl apply -f service/flask-app-service.yaml    # Path to your service YAML file
 
       # Step 13: Check the status of the deployed pods
       - name: Check deployment status
