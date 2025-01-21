@@ -1,6 +1,6 @@
 name: Build, Push and Deploy Flask App
 
-# Trigger the workflow when code is pushed to the 'main' branch
+# Trigger the workflow when code is pushed to the 'shaik' branch
 on:
   push:
     branches:
@@ -28,12 +28,12 @@ jobs:
       # Step 4: Build the Docker image of the Flask app
       - name: Build Docker image
         run: |
-          docker build -t shaik2024/flask-app:${{ github.sha }} .  # Replace suffiyan13 with your Docker Hub username
+          docker build -t shaik2024/flask-app:${{ github.sha }} .  # Replace shaik2024 with your Docker Hub username
 
       # Step 5: Push the Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
         run: |
-          docker push shaik2024/flask-app:${{ github.sha }}  # Replace suffiyan13 with your Docker Hub username
+          docker push shaik2024/flask-app:${{ github.sha }}  # Replace shaik2024 with your Docker Hub username
 
   deploy:
     runs-on: ubuntu-latest
@@ -71,14 +71,19 @@ jobs:
       # Step 11: Apply Kubernetes deployment YAML (Flask app deployment)
       - name: Deploy Flask app to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yaml  # Path to your deployment YAML file
+          kubectl apply -f .github/deployment/flask-app-deployment.yaml  # Path to your deployment YAML file
 
-      # Step 12: Check the status of the deployed pods
+      # Step 12: Apply Kubernetes service YAML (Flask app service)
+      - name: Deploy Flask service to Kubernetes
+        run: |
+          kubectl apply -f .github/deployment/flask-app-service.yaml
+
+      # Step 13: Check the status of the deployed pods
       - name: Check deployment status
         run: |
           kubectl get pods
 
-      # Step 13: If deployment fails, send a Slack notification
+      # Step 14: If deployment fails, send a Slack notification
       - name: Send Slack notification on failure
         if: failure()  # This step is triggered only if previous steps fail
         run: |
