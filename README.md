@@ -1,4 +1,4 @@
-collecting the metrics of application 
+collecting the metrics of the application 
 
 ![image](https://github.com/user-attachments/assets/7be9d883-7cdf-4468-91ae-fde255cd9ae4)
 
